@@ -13,6 +13,18 @@ class Admin(QtWidgets.QMainWindow):
         #Inicializamos el atributo hilo que contendrá los hilos declarados posteriormente
         self.thread={}
         
+        #variables para FCFS y RR
+        self.quantum.setText("0")
+        self.orden_1.setText("1")
+        self.orden_2.setText("2")
+        self.orden_3.setText("3")
+        self.orden_4.setText("4")
+        self.orden_5.setText("5")
+        
+        self.quantum_value = int(self.quantum.text())
+        self.get_order()
+
+        
         #Inicializamos las señales de boton presionado con una funcion lambda para pasar argumentos
         self.iniciar_1.clicked.connect(lambda: self.iniciar(1))
         self.iniciar_2.clicked.connect(lambda: self.iniciar(2))
@@ -35,22 +47,27 @@ class Admin(QtWidgets.QMainWindow):
         self.lotes_btn.clicked.connect(lambda: self.iniciar(1, 'lotes'))
         self.multi_btn.clicked.connect(self.multiprogramacion)
         self.reset_btn.clicked.connect(self.reset)
-   
-        #Inicializamos un hilo para cada proceso y se le pone 'activo' como estado
-        self.thread[1] = Thread(parent=None, index=1)
-        self.thread[1].estado = 'activo'
-        self.thread[2] = Thread(parent=None, index=2)
-        self.thread[2].estado = 'activo'
-        self.thread[3] = Thread(parent=None, index=3)
-        self.thread[3].estado = 'activo'
-        self.thread[4] = Thread(parent=None, index=4)
-        self.thread[4].estado = 'activo'
-        self.thread[5] = Thread(parent=None, index=5)
-        self.thread[5].estado = 'activo'
         
+        self.rr_btn.clicked.connect(self.round_robin)
+        self.fcfs_btn.clicked.connect(self.fcfs)
+        
+        self.threads_init()
         #activo se utiliza para hacer toggle del estado de los botones
         self.activo = True
-    
+        
+    def threads_init (self):
+        #Inicializamos un hilo para cada proceso y se le pone 'activo' como estado
+        self.thread[self.ord_1] = Thread(parent=None, index=self.ord_1)
+        self.thread[self.ord_1].estado = 'activo'
+        self.thread[self.ord_2] = Thread(parent=None, index=self.ord_2)
+        self.thread[self.ord_2].estado = 'activo'
+        self.thread[self.ord_3] = Thread(parent=None, index=self.ord_3)
+        self.thread[self.ord_3].estado = 'activo'
+        self.thread[self.ord_4] = Thread(parent=None, index=self.ord_4)
+        self.thread[self.ord_4].estado = 'activo'
+        self.thread[self.ord_5] = Thread(parent=None, index=self.ord_5)
+        self.thread[self.ord_5].estado = 'activo'
+        
     #La función iniciar recibe el numero del proceso que se va a iniciar y el modo que
     #determina la manera en la que se inicia cada proceso
     def iniciar (self, num_proceso, modo='boton'):
@@ -166,31 +183,31 @@ class Admin(QtWidgets.QMainWindow):
         self.thread[index].progreso = contador
         
         #Dependiendo del index del remitente es la barra de progreso a la que se le aumenta el valor
-        if index==1:
+        if index==self.ord_1:
             if self.thread[index].progreso == 101:
                 self.pausar(index)
                 self.iniciar_1.setEnabled(False)
             else:
                 self.progressBar_1.setValue(self.thread[index].progreso)
-        if index==2:
+        if index==self.ord_2:
             if self.thread[index].progreso == 101:
                 self.pausar(index)
                 self.iniciar_2.setEnabled(False)
             else:
                 self.progressBar_2.setValue(self.thread[index].progreso)
-        if index==3:
+        if index==self.ord_3:
             if self.thread[index].progreso == 101:
                 self.pausar(index)
                 self.iniciar_3.setEnabled(False)
             else:
                 self.progressBar_3.setValue(self.thread[index].progreso)
-        if index==4:
+        if index==self.ord_4:
             if self.thread[index].progreso == 101:
                 self.pausar(index)
                 self.iniciar_4.setEnabled(False)               
             else:
                 self.progressBar_4.setValue(self.thread[index].progreso)
-        if index==5:
+        if index==self.ord_5:
             if self.thread[index].progreso == 101:
                 self.pausar(index)
                 self.iniciar_5.setEnabled(False)
@@ -242,6 +259,26 @@ class Admin(QtWidgets.QMainWindow):
         self.pausar_5.setEnabled(False)
         self.cancelar_5.setEnabled(False)   
         self.thread[5].estado = 'activo'
+        
+    def get_order(self):
+        self.ord_1 = int(self.orden_1.text())
+        self.ord_2 = int(self.orden_2.text())
+        self.ord_3 = int(self.orden_3.text())
+        self.ord_4 = int(self.orden_4.text())
+        self.ord_5 = int(self.orden_5.text())
+
+    def round_robin(self):
+        print(self.quantum_value)
+    
+    def fcfs(self):
+        self.get_order()
+
+        self.threads_init()
+        
+        self.reset_btn.setEnabled(False)
+        
+        self.iniciar(1, 'lotes')
+        print(self.quantum_value)
 
 #La clase Thread extiende de los QThread de QTCore lo que nos permite hacer override de sus funciones
 class Thread(QtCore.QThread):
@@ -279,6 +316,6 @@ class Thread(QtCore.QThread):
 if __name__ == "__main__":
 	app = QtWidgets.QApplication(sys.argv)
 	mainWindow = Admin()
-	mainWindow.resize(810, 480)
+	mainWindow.resize(810, 880)
 	mainWindow.show()
 	sys.exit(app.exec_())
