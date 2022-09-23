@@ -288,8 +288,7 @@ class Admin(QtWidgets.QMainWindow):
         
     def round_robin(self):
         if self.quantum.text(): self.quantum_value = int(self.quantum.text())
-        print(self.quantum_value)
-    
+ 
     def fcfs(self):
         self.get_orden()
 
@@ -298,7 +297,6 @@ class Admin(QtWidgets.QMainWindow):
         self.reset_btn.setEnabled(False)
         
         self.iniciar(1, 'lotes')
-        print(self.quantum_value)
 
 #La clase Thread extiende de los QThread de QTCore lo que nos permite hacer override de sus funciones
 class Thread(QtCore.QThread):
