@@ -6,21 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>801</width>
-    <height>825</height>
+    <width>809</width>
+    <height>589</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Administrador de Procesos</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>190</y>
+      <y>130</y>
       <width>784</width>
-      <height>621</height>
+      <height>401</height>
      </rect>
     </property>
     <property name="autoFillBackground">
@@ -35,10 +38,10 @@
     <widget class="QLineEdit" name="orden_1">
      <property name="geometry">
       <rect>
-       <x>340</x>
-       <y>100</y>
+       <x>230</x>
+       <y>60</y>
        <width>51</width>
-       <height>31</height>
+       <height>41</height>
       </rect>
      </property>
      <property name="font">
@@ -53,10 +56,10 @@
     <widget class="QLineEdit" name="orden_3">
      <property name="geometry">
       <rect>
-       <x>340</x>
-       <y>320</y>
+       <x>230</x>
+       <y>180</y>
        <width>51</width>
-       <height>31</height>
+       <height>41</height>
       </rect>
      </property>
      <property name="font">
@@ -71,11 +74,14 @@
     <widget class="QProgressBar" name="progressBar_1">
      <property name="geometry">
       <rect>
-       <x>270</x>
-       <y>130</y>
-       <width>511</width>
+       <x>290</x>
+       <y>60</y>
+       <width>491</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(85, 170, 255);</string>
      </property>
      <property name="value">
       <number>0</number>
@@ -87,9 +93,9 @@
     <widget class="QPushButton" name="pausar_5">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>570</y>
-       <width>61</width>
+       <x>60</x>
+       <y>300</y>
+       <width>41</width>
        <height>41</height>
       </rect>
      </property>
@@ -97,7 +103,7 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
-      <string>Pausar</string>
+      <string/>
      </property>
      <property name="checkable">
       <bool>false</bool>
@@ -109,10 +115,10 @@
     <widget class="QLineEdit" name="T_4">
      <property name="geometry">
       <rect>
-       <x>270</x>
-       <y>430</y>
+       <x>160</x>
+       <y>240</y>
        <width>51</width>
-       <height>31</height>
+       <height>41</height>
       </rect>
      </property>
      <property name="font">
@@ -127,9 +133,9 @@
     <widget class="QPushButton" name="cancelar_3">
      <property name="geometry">
       <rect>
-       <x>180</x>
-       <y>352</y>
-       <width>71</width>
+       <x>110</x>
+       <y>180</y>
+       <width>41</width>
        <height>41</height>
       </rect>
      </property>
@@ -137,16 +143,16 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
-      <string>Cancelar</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLineEdit" name="T_2">
      <property name="geometry">
       <rect>
-       <x>270</x>
-       <y>210</y>
+       <x>160</x>
+       <y>120</y>
        <width>51</width>
-       <height>31</height>
+       <height>41</height>
       </rect>
      </property>
      <property name="font">
@@ -161,9 +167,9 @@
     <widget class="QPushButton" name="cancelar_4">
      <property name="geometry">
       <rect>
-       <x>180</x>
-       <y>460</y>
-       <width>71</width>
+       <x>110</x>
+       <y>240</y>
+       <width>41</width>
        <height>41</height>
       </rect>
      </property>
@@ -171,15 +177,15 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
-      <string>Cancelar</string>
+      <string/>
      </property>
     </widget>
     <widget class="QPushButton" name="iniciar_5">
      <property name="geometry">
       <rect>
-       <x>90</x>
-       <y>570</y>
-       <width>71</width>
+       <x>10</x>
+       <y>300</y>
+       <width>41</width>
        <height>41</height>
       </rect>
      </property>
@@ -187,15 +193,15 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
-      <string>Iniciar</string>
+      <string/>
      </property>
     </widget>
     <widget class="QPushButton" name="cancelar_1">
      <property name="geometry">
       <rect>
-       <x>180</x>
-       <y>130</y>
-       <width>71</width>
+       <x>110</x>
+       <y>60</y>
+       <width>41</width>
        <height>41</height>
       </rect>
      </property>
@@ -203,7 +209,7 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
-      <string>Cancelar</string>
+      <string/>
      </property>
     </widget>
     <widget class="QPushButton" name="pausar_1">
@@ -212,9 +218,9 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>130</y>
-       <width>61</width>
+       <x>60</x>
+       <y>60</y>
+       <width>41</width>
        <height>41</height>
       </rect>
      </property>
@@ -222,7 +228,7 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
-      <string>Pausar</string>
+      <string/>
      </property>
      <property name="checkable">
       <bool>false</bool>
@@ -237,9 +243,9 @@
     <widget class="QPushButton" name="iniciar_2">
      <property name="geometry">
       <rect>
-       <x>90</x>
-       <y>240</y>
-       <width>71</width>
+       <x>10</x>
+       <y>120</y>
+       <width>41</width>
        <height>41</height>
       </rect>
      </property>
@@ -247,16 +253,16 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
-      <string>Iniciar</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLineEdit" name="T_3">
      <property name="geometry">
       <rect>
-       <x>270</x>
-       <y>320</y>
+       <x>160</x>
+       <y>180</y>
        <width>51</width>
-       <height>31</height>
+       <height>41</height>
       </rect>
      </property>
      <property name="font">
@@ -271,25 +277,28 @@
     <widget class="QPushButton" name="iniciar_1">
      <property name="geometry">
       <rect>
-       <x>90</x>
-       <y>130</y>
-       <width>71</width>
+       <x>10</x>
+       <y>60</y>
+       <width>41</width>
        <height>41</height>
       </rect>
      </property>
      <property name="cursor">
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <property name="text">
-      <string>Iniciar</string>
+      <string/>
      </property>
     </widget>
     <widget class="QPushButton" name="pausar_4">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>460</y>
-       <width>61</width>
+       <x>60</x>
+       <y>240</y>
+       <width>41</width>
        <height>41</height>
       </rect>
      </property>
@@ -297,7 +306,7 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
-      <string>Pausar</string>
+      <string/>
      </property>
      <property name="checkable">
       <bool>false</bool>
@@ -309,9 +318,9 @@
     <widget class="QPushButton" name="iniciar_3">
      <property name="geometry">
       <rect>
-       <x>90</x>
-       <y>350</y>
-       <width>71</width>
+       <x>10</x>
+       <y>180</y>
+       <width>41</width>
        <height>41</height>
       </rect>
      </property>
@@ -319,15 +328,15 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
-      <string>Iniciar</string>
+      <string/>
      </property>
     </widget>
     <widget class="QPushButton" name="cancelar_5">
      <property name="geometry">
       <rect>
-       <x>180</x>
-       <y>570</y>
-       <width>71</width>
+       <x>110</x>
+       <y>300</y>
+       <width>41</width>
        <height>41</height>
       </rect>
      </property>
@@ -335,15 +344,15 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
-      <string>Cancelar</string>
+      <string/>
      </property>
     </widget>
     <widget class="QProgressBar" name="progressBar_4">
      <property name="geometry">
       <rect>
-       <x>270</x>
-       <y>460</y>
-       <width>511</width>
+       <x>290</x>
+       <y>240</y>
+       <width>491</width>
        <height>41</height>
       </rect>
      </property>
@@ -354,9 +363,9 @@
     <widget class="QProgressBar" name="progressBar_5">
      <property name="geometry">
       <rect>
-       <x>270</x>
-       <y>570</y>
-       <width>511</width>
+       <x>290</x>
+       <y>300</y>
+       <width>491</width>
        <height>41</height>
       </rect>
      </property>
@@ -367,10 +376,10 @@
     <widget class="QLineEdit" name="T_1">
      <property name="geometry">
       <rect>
-       <x>270</x>
-       <y>100</y>
+       <x>160</x>
+       <y>60</y>
        <width>51</width>
-       <height>31</height>
+       <height>41</height>
       </rect>
      </property>
      <property name="font">
@@ -385,9 +394,9 @@
     <widget class="QPushButton" name="pausar_2">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>240</y>
-       <width>61</width>
+       <x>60</x>
+       <y>120</y>
+       <width>41</width>
        <height>41</height>
       </rect>
      </property>
@@ -395,7 +404,7 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
-      <string>Pausar</string>
+      <string/>
      </property>
      <property name="checkable">
       <bool>false</bool>
@@ -407,9 +416,9 @@
     <widget class="QPushButton" name="pausar_3">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>350</y>
-       <width>61</width>
+       <x>60</x>
+       <y>180</y>
+       <width>41</width>
        <height>41</height>
       </rect>
      </property>
@@ -417,7 +426,7 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
-      <string>Pausar</string>
+      <string/>
      </property>
      <property name="checkable">
       <bool>false</bool>
@@ -429,9 +438,9 @@
     <widget class="QProgressBar" name="progressBar_3">
      <property name="geometry">
       <rect>
-       <x>270</x>
-       <y>350</y>
-       <width>511</width>
+       <x>290</x>
+       <y>180</y>
+       <width>491</width>
        <height>41</height>
       </rect>
      </property>
@@ -442,9 +451,9 @@
     <widget class="QProgressBar" name="progressBar_2">
      <property name="geometry">
       <rect>
-       <x>270</x>
-       <y>240</y>
-       <width>511</width>
+       <x>290</x>
+       <y>120</y>
+       <width>491</width>
        <height>41</height>
       </rect>
      </property>
@@ -455,9 +464,9 @@
     <widget class="QPushButton" name="iniciar_4">
      <property name="geometry">
       <rect>
-       <x>90</x>
-       <y>460</y>
-       <width>71</width>
+       <x>10</x>
+       <y>240</y>
+       <width>41</width>
        <height>41</height>
       </rect>
      </property>
@@ -465,16 +474,16 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
-      <string>Iniciar</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLineEdit" name="orden_4">
      <property name="geometry">
       <rect>
-       <x>340</x>
-       <y>430</y>
+       <x>230</x>
+       <y>240</y>
        <width>51</width>
-       <height>31</height>
+       <height>41</height>
       </rect>
      </property>
      <property name="font">
@@ -489,9 +498,9 @@
     <widget class="QPushButton" name="cancelar_2">
      <property name="geometry">
       <rect>
-       <x>180</x>
-       <y>240</y>
-       <width>71</width>
+       <x>110</x>
+       <y>120</y>
+       <width>41</width>
        <height>41</height>
       </rect>
      </property>
@@ -499,16 +508,16 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
-      <string>Cancelar</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLineEdit" name="orden_5">
      <property name="geometry">
       <rect>
-       <x>340</x>
-       <y>540</y>
+       <x>230</x>
+       <y>300</y>
        <width>51</width>
-       <height>31</height>
+       <height>41</height>
       </rect>
      </property>
      <property name="font">
@@ -523,10 +532,10 @@
     <widget class="QLineEdit" name="T_5">
      <property name="geometry">
       <rect>
-       <x>270</x>
-       <y>540</y>
+       <x>160</x>
+       <y>300</y>
        <width>51</width>
-       <height>31</height>
+       <height>41</height>
       </rect>
      </property>
      <property name="font">
@@ -541,10 +550,10 @@
     <widget class="QLineEdit" name="orden_2">
      <property name="geometry">
       <rect>
-       <x>340</x>
-       <y>210</y>
+       <x>230</x>
+       <y>120</y>
        <width>51</width>
-       <height>31</height>
+       <height>41</height>
       </rect>
      </property>
      <property name="font">
@@ -556,24 +565,11 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QPushButton" name="reset_btn">
-     <property name="geometry">
-      <rect>
-       <x>230</x>
-       <y>20</y>
-       <width>341</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Reset</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>280</x>
-       <y>80</y>
+       <x>170</x>
+       <y>100</y>
        <width>47</width>
        <height>16</height>
       </rect>
@@ -585,8 +581,8 @@
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
-       <x>280</x>
-       <y>520</y>
+       <x>170</x>
+       <y>340</y>
        <width>47</width>
        <height>16</height>
       </rect>
@@ -598,8 +594,8 @@
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
-       <x>280</x>
-       <y>410</y>
+       <x>170</x>
+       <y>280</y>
        <width>47</width>
        <height>16</height>
       </rect>
@@ -611,8 +607,8 @@
     <widget class="QLabel" name="label_5">
      <property name="geometry">
       <rect>
-       <x>280</x>
-       <y>300</y>
+       <x>170</x>
+       <y>220</y>
        <width>47</width>
        <height>16</height>
       </rect>
@@ -624,8 +620,8 @@
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>280</x>
-       <y>190</y>
+       <x>170</x>
+       <y>160</y>
        <width>47</width>
        <height>16</height>
       </rect>
@@ -637,8 +633,8 @@
     <widget class="QLabel" name="label_7">
      <property name="geometry">
       <rect>
-       <x>350</x>
-       <y>80</y>
+       <x>240</x>
+       <y>100</y>
        <width>47</width>
        <height>13</height>
       </rect>
@@ -650,8 +646,8 @@
     <widget class="QLabel" name="label_8">
      <property name="geometry">
       <rect>
-       <x>350</x>
-       <y>520</y>
+       <x>240</x>
+       <y>340</y>
        <width>47</width>
        <height>13</height>
       </rect>
@@ -663,8 +659,8 @@
     <widget class="QLabel" name="label_9">
      <property name="geometry">
       <rect>
-       <x>350</x>
-       <y>410</y>
+       <x>240</x>
+       <y>280</y>
        <width>47</width>
        <height>13</height>
       </rect>
@@ -676,8 +672,8 @@
     <widget class="QLabel" name="label_10">
      <property name="geometry">
       <rect>
-       <x>350</x>
-       <y>300</y>
+       <x>240</x>
+       <y>220</y>
        <width>47</width>
        <height>13</height>
       </rect>
@@ -689,14 +685,27 @@
     <widget class="QLabel" name="label_11">
      <property name="geometry">
       <rect>
-       <x>350</x>
-       <y>190</y>
+       <x>240</x>
+       <y>160</y>
        <width>47</width>
        <height>13</height>
       </rect>
      </property>
      <property name="text">
       <string>Orden</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="reset_btn">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>141</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>   Reset Process</string>
      </property>
     </widget>
     <zorder>progressBar_1</zorder>
@@ -729,7 +738,6 @@
     <zorder>orden_3</zorder>
     <zorder>T_4</zorder>
     <zorder>T_3</zorder>
-    <zorder>reset_btn</zorder>
     <zorder>label_2</zorder>
     <zorder>label_3</zorder>
     <zorder>label_4</zorder>
@@ -740,40 +748,41 @@
     <zorder>label_9</zorder>
     <zorder>label_10</zorder>
     <zorder>label_11</zorder>
+    <zorder>reset_btn</zorder>
    </widget>
    <widget class="QPushButton" name="lotes_btn">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>10</y>
-      <width>341</width>
+      <x>20</x>
+      <y>20</y>
+      <width>171</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>Lotes</string>
+     <string>   Proceso por Lotes</string>
     </property>
    </widget>
    <widget class="QPushButton" name="multi_btn">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>10</y>
-      <width>341</width>
+      <x>20</x>
+      <y>70</y>
+      <width>171</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>Multiprogramación</string>
+     <string>   Multiprogramación</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="quantum">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>80</y>
-      <width>161</width>
-      <height>31</height>
+      <x>200</x>
+      <y>70</y>
+      <width>61</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
@@ -788,7 +797,7 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>200</x>
       <y>110</y>
       <width>71</width>
       <height>21</height>
@@ -809,27 +818,53 @@
    <widget class="QPushButton" name="rr_btn">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>140</y>
-      <width>161</width>
+      <x>270</x>
+      <y>70</y>
+      <width>91</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>Round Robin</string>
+     <string>   RR</string>
     </property>
    </widget>
    <widget class="QPushButton" name="fcfs_btn">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>140</y>
-      <width>171</width>
+      <x>200</x>
+      <y>20</y>
+      <width>161</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>FCFS</string>
+     <string>   Proceso FCFS</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="priori_btn">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>20</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>   Prioridades</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="colmulti_btn">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>70</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>   Colas multiples</string>
     </property>
    </widget>
   </widget>
