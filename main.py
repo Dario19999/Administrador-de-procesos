@@ -1,11 +1,7 @@
-from PyQt5 import QtCore, QtWidgets, QtGui
+from PyQt5 import QtCore, QtWidgets
+from PyQt5.QtGui import * 
 from PyQt5 import uic
 import sys, time, os
-
-from PyQt5.QtWidgets import * 
-from PyQt5.QtGui import * 
-from PyQt5.QtCore import * 
-import sys 
 
 #Nuestra clase para la main window llamada Admin
 class Admin(QtWidgets.QMainWindow):
