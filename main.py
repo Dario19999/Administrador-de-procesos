@@ -1,4 +1,5 @@
-from PyQt5 import QtCore, QtWidgets, QtGui
+from PyQt5 import QtCore, QtWidgets
+from PyQt5.QtGui import * 
 from PyQt5 import uic
 import sys, time, os
 
@@ -24,29 +25,54 @@ class Admin(QtWidgets.QMainWindow):
         
         #Inicializamos las señales de boton presionado con una funcion lambda para pasar argumentos
         self.iniciar_1.clicked.connect(lambda: self.iniciar(1))
+        self.iniciar_1.setIcon(QIcon('icon_play.png'))
         self.iniciar_2.clicked.connect(lambda: self.iniciar(2))
+        self.iniciar_2.setIcon(QIcon('icon_play.png'))
         self.iniciar_3.clicked.connect(lambda: self.iniciar(3))
+        self.iniciar_3.setIcon(QIcon('icon_play.png'))
         self.iniciar_4.clicked.connect(lambda: self.iniciar(4))
+        self.iniciar_4.setIcon(QIcon('icon_play.png'))
         self.iniciar_5.clicked.connect(lambda: self.iniciar(5))
-        
+        self.iniciar_5.setIcon(QIcon('icon_play.png'))
+
         self.pausar_1.clicked.connect(lambda: self.pausar(1))
+        self.pausar_1.setIcon(QIcon('icon_pause.png'))
         self.pausar_2.clicked.connect(lambda: self.pausar(2))
+        self.pausar_2.setIcon(QIcon('icon_pause.png'))
         self.pausar_3.clicked.connect(lambda: self.pausar(3))
+        self.pausar_3.setIcon(QIcon('icon_pause.png'))
         self.pausar_4.clicked.connect(lambda: self.pausar(4))
+        self.pausar_4.setIcon(QIcon('icon_pause.png'))
         self.pausar_5.clicked.connect(lambda: self.pausar(5))
+        self.pausar_5.setIcon(QIcon('icon_pause.png'))
         
         self.cancelar_1.clicked.connect(lambda: self.cancelar(1))
+        self.cancelar_1.setIcon(QIcon('icon_cancel.png'))
         self.cancelar_2.clicked.connect(lambda: self.cancelar(2))
+        self.cancelar_2.setIcon(QIcon('icon_cancel.png'))
         self.cancelar_3.clicked.connect(lambda: self.cancelar(3))
+        self.cancelar_3.setIcon(QIcon('icon_cancel.png'))
         self.cancelar_4.clicked.connect(lambda: self.cancelar(4))
+        self.cancelar_4.setIcon(QIcon('icon_cancel.png'))
         self.cancelar_5.clicked.connect(lambda: self.cancelar(5))
+        self.cancelar_5.setIcon(QIcon('icon_cancel.png'))
         
         self.lotes_btn.clicked.connect(lambda: self.iniciar(1, 'lotes'))
+        self.lotes_btn.setIcon(QIcon('icon_lotes.png'))
         self.multi_btn.clicked.connect(self.multiprogramacion)
+        self.multi_btn.setIcon(QIcon('icon_multiprog.png'))
         self.reset_btn.clicked.connect(self.reset)
+        self.reset_btn.setIcon(QIcon('icon_reset.png'))
+
+        self.priori_btn.clicked.connect(self.prioridades)
+        self.priori_btn.setIcon(QIcon('icon_priori.png'))
+        self.colmulti_btn.clicked.connect(self.colas_multiples)
+        self.colmulti_btn.setIcon(QIcon('icon_multicol.png'))
         
         self.rr_btn.clicked.connect(self.round_robin)
+        self.rr_btn.setIcon(QIcon('icon_rr.png'))
         self.fcfs_btn.clicked.connect(self.fcfs)
+        self.fcfs_btn.setIcon(QIcon('icon_fcfs.png'))
         
         self.threads_init()
         #activo se utiliza para hacer toggle del estado de los botones
@@ -285,9 +311,11 @@ class Admin(QtWidgets.QMainWindow):
         else: self.TCPU_4 = self.T_4.text()
         if self.T_5.text() : self.TCPU_5 = int(self.T_5.text())
         else: self.TCPU_5 = self.T_5.text()
-        
+
+    #Pendiente por asignar algoritmo  
     def round_robin(self):
         if self.quantum.text(): self.quantum_value = int(self.quantum.text())
+        print("Inicio de algoritmo de Round Robin...")
  
     def fcfs(self):
         self.get_orden()
@@ -297,6 +325,14 @@ class Admin(QtWidgets.QMainWindow):
         self.reset_btn.setEnabled(False)
         
         self.iniciar(1, 'lotes')
+
+    #Pendiente por asignar algoritmo
+    def prioridades(self):
+        print("Inicio de algoritmo de Prioridades...")
+
+    #Pendiente por asignar algoritmo
+    def colas_multiples(self):
+        print("Inicio de algoritmo de Colas Multiples...")
 
 #La clase Thread extiende de los QThread de QTCore lo que nos permite hacer override de sus funciones
 class Thread(QtCore.QThread):
