@@ -1,3 +1,4 @@
+from threading import currentThread
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtGui import * 
 from PyQt5 import uic
@@ -13,13 +14,20 @@ class Admin(QtWidgets.QMainWindow):
        
         #Inicializamos el atributo hilo que contendrá los hilos declarados posteriormente
         self.thread={}
-        
+        self.finished = []
         #variables para FCFS y RR
         self.orden_1.setText("1")
         self.orden_2.setText("2")
         self.orden_3.setText("3")
         self.orden_4.setText("4")
         self.orden_5.setText("5")
+        
+        self.quantum.setText("2")
+        self.T_1.setText("5")
+        self.T_2.setText("5")
+        self.T_3.setText("5")
+        self.T_4.setText("5")
+        self.T_5.setText("5")
         
         self.get_orden()
         
@@ -81,27 +89,17 @@ class Admin(QtWidgets.QMainWindow):
     def threads_init (self):
         #Inicializamos un hilo para cada proceso y se le pone 'activo' como estado
         self.get_TCPU()
-        self.thread[self.ord_1] = Thread(parent=None, index=self.ord_1)
-        self.thread[self.ord_1].estado = 'activo'
-        self.thread[self.ord_1].TCPU = self.TCPU_1
-        if self.TCPU_1: self.thread[self.ord_1].porcentaje_prog = 100/self.TCPU_1
-        self.thread[self.ord_2] = Thread(parent=None, index=self.ord_2)
-        self.thread[self.ord_2].estado = 'activo'
-        self.thread[self.ord_2].TCPU = self.TCPU_2
-        if self.TCPU_2: self.thread[self.ord_2].porcentaje_prog = 100/self.TCPU_2
-        self.thread[self.ord_3] = Thread(parent=None, index=self.ord_3)
-        self.thread[self.ord_3].estado = 'activo'
-        self.thread[self.ord_3].TCPU = self.TCPU_3
-        if self.TCPU_3: self.thread[self.ord_3].porcentaje_prog = 100/self.TCPU_3
-        self.thread[self.ord_4] = Thread(parent=None, index=self.ord_4)
-        self.thread[self.ord_4].estado = 'activo'
-        self.thread[self.ord_4].TCPU = self.TCPU_4
-        if self.TCPU_4: self.thread[self.ord_4].porcentaje_prog = 100/self.TCPU4
-        self.thread[self.ord_5] = Thread(parent=None, index=self.ord_5)
+        self.thread[self.ord_1] = Thread(parent=None, index=self.ord_1, quantum=self.quantum_value, tcpu=int(self.TCPU_1))
+        self.thread[self.ord_1].estado = 'activo' 
+        self.thread[self.ord_2] = Thread(parent=None, index=self.ord_2, quantum=self.quantum_value, tcpu=int(self.TCPU_2))
+        self.thread[self.ord_2].estado = 'activo'     
+        self.thread[self.ord_3] = Thread(parent=None, index=self.ord_3, quantum=self.quantum_value, tcpu=int(self.TCPU_3))
+        self.thread[self.ord_3].estado = 'activo'       
+        self.thread[self.ord_4] = Thread(parent=None, index=self.ord_4, quantum=self.quantum_value, tcpu=int(self.TCPU_4))
+        self.thread[self.ord_4].estado = 'activo'   
+        self.thread[self.ord_5] = Thread(parent=None, index=self.ord_5, quantum=self.quantum_value, tcpu=int(self.TCPU_5))
         self.thread[self.ord_5].estado = 'activo'
-        self.thread[self.ord_5].TCPU = self.TCPU_5
-        if self.TCPU_5: self.thread[self.ord_5].porcentaje_prog = 100/self.TCPU_5
-        
+  
     #La función iniciar recibe el numero del proceso que se va a iniciar y el modo que
     #determina la manera en la que se inicia cada proceso
     def iniciar (self, num_proceso, modo='boton'):
@@ -111,21 +109,23 @@ class Admin(QtWidgets.QMainWindow):
         if (num_proceso > 1) & (modo == 'lotes'):
             #Si el proceso anterior no está marcado como candelado, iniciamos el proceso siguiente en cuanto termine el actual
             if (num_proceso <= 5)  & (self.thread[num_proceso-1].estado != 'cancelado'): 
-                self.thread[num_proceso].start()
                 self.thread[num_proceso].progreso_signal.connect(self.procesar)
                 self.thread[num_proceso].finished.connect(lambda: self.iniciar(num_proceso+1, 'lotes'))
+                self.thread[num_proceso].start()
             else:
                 self.activo = False
                 
        #Si el ya no es el primer proceso lo validamos solo con el modo para que los botones no se desactiven cuando no deben         
         elif modo == 'lotes':
-            self.thread[num_proceso].start()
             self.thread[num_proceso].progreso_signal.connect(self.procesar)
             self.thread[num_proceso].finished.connect(lambda: self.iniciar(num_proceso+1, 'lotes'))
+            self.thread[num_proceso].start()
         else:
             #Este caso es para cuando no se está ejecutando por lotes, no se detecta la señal de finished
-            self.thread[num_proceso].start()
             self.thread[num_proceso].progreso_signal.connect(self.procesar)
+            self.thread[num_proceso].start()
+            
+        
         
         #Aqui se hace una validación para reactivar los botones de cada proceso
         if (num_proceso == self.ord_1) & (self.activo):
@@ -150,8 +150,7 @@ class Admin(QtWidgets.QMainWindow):
             self.cancelar_5.setEnabled(True)       
         
         self.reset_btn.setEnabled(True)
-        
-    
+           
     #la función de pausar se usa para detener el hilo, esta usa la funcion terminate() por lo que los mata también
     def pausar (self, num_proceso):
         self.reset_btn.setEnabled(True)
@@ -218,7 +217,6 @@ class Admin(QtWidgets.QMainWindow):
     def procesar(self, contador):
         #El íncide del proceso es el indice del remitente de la señal (cada proceso)
         index = self.sender().index
-        
         #Contador es el argumento que recibe la señal que emite el hilo
         self.thread[index].progreso = contador
         
@@ -227,33 +225,56 @@ class Admin(QtWidgets.QMainWindow):
             if self.thread[index].progreso >= 101:
                 self.pausar(index)
                 self.iniciar_1.setEnabled(False)
+                self.finished.append(self.ord_1)
             else:
                 self.progressBar_1.setValue(self.thread[index].progreso)
+                if self.thread[index].progreso == self.thread[index].progress_chunk*self.quantum_value:
+                    self.pausar(index)
+                    self.iniciar_1.setEnabled(False)
         if index==self.ord_2:
             if self.thread[index].progreso >= 101:
                 self.pausar(index)
                 self.iniciar_2.setEnabled(False)
+                self.finished.append(self.ord_2)
             else:
                 self.progressBar_2.setValue(self.thread[index].progreso)
+                if self.thread[index].progreso == self.thread[index].progress_chunk*self.quantum_value:
+                    self.pausar(index)
+                    self.iniciar_2.setEnabled(False)
         if index==self.ord_3:
             if self.thread[index].progreso >= 101:
                 self.pausar(index)
                 self.iniciar_3.setEnabled(False)
+                self.finished.append(self.ord_3)
             else:
                 self.progressBar_3.setValue(self.thread[index].progreso)
+                if self.thread[index].progreso == self.thread[index].progress_chunk*self.quantum_value:
+                    self.pausar(index)
+                    self.iniciar_3.setEnabled(False)
         if index==self.ord_4:
             if self.thread[index].progreso >= 101:
                 self.pausar(index)
-                self.iniciar_4.setEnabled(False)               
+                self.iniciar_4.setEnabled(False)   
+                self.finished.append(self.ord_4)                        
             else:
                 self.progressBar_4.setValue(self.thread[index].progreso)
+                if self.thread[index].progreso == self.thread[index].progress_chunk*self.quantum_value:
+                    self.pausar(index)
+                    self.iniciar_4.setEnabled(False)
         if index==self.ord_5:
             if self.thread[index].progreso >= 101:
                 self.pausar(index)
                 self.iniciar_5.setEnabled(False)
+                self.finished.append(self.ord_5)  
             else:
-                self.progressBar_5.setValue(self.thread[index].progreso)  
-    
+                self.progressBar_5.setValue(self.thread[index].progreso)
+                if self.thread[index].progreso == self.thread[index].progress_chunk*self.quantum_value:
+                    self.pausar(index)
+                    self.iniciar_5.setEnabled(False)
+
+                if(len(self.finished) != 5):
+                    self.iniciar(1, 'lotes')
+
     #El método de multiprogramación ejecuta todos los hilos sumultáneamente con un modo distinto a lotes
     def multiprogramacion(self):
         self.reset_btn.setEnabled(False)
@@ -301,6 +322,7 @@ class Admin(QtWidgets.QMainWindow):
         self.ord_5 = int(self.orden_5.text())
 
     def get_TCPU(self):
+        if self.quantum.text(): self.quantum_value = int(self.quantum.text())
         if self.T_1.text() : self.TCPU_1 = int(self.T_1.text())
         else: self.TCPU_1 = self.T_1.text()
         if self.T_2.text() : self.TCPU_2 = int(self.T_2.text())
@@ -314,9 +336,15 @@ class Admin(QtWidgets.QMainWindow):
 
     #Pendiente por asignar algoritmo  
     def round_robin(self):
-        if self.quantum.text(): self.quantum_value = int(self.quantum.text())
         print("Inicio de algoritmo de Round Robin...")
- 
+        self.get_orden()
+
+        self.threads_init()
+        
+        self.reset_btn.setEnabled(False)
+        
+        self.iniciar(1, 'lotes')
+        
     def fcfs(self):
         self.get_orden()
 
@@ -342,24 +370,39 @@ class Thread(QtCore.QThread):
     progreso_signal = QtCore.pyqtSignal(int)
 
     #Se declara el constructor de la clase
-    def __init__(self, parent=None, index=0):
+    def __init__(self, parent=None, index=0, quantum=0, tcpu=0):
         super(Thread, self).__init__(parent)
         self.index = index
         self.is_running = True
         self.contador = 0
+        self.quantum = quantum
+        self.tcpu = tcpu
+        self.progress_chunk = 100/self.tcpu
   
     #Run es el método que inicia el proceso del hilo,
     #Aumentando el contador de la barra de progreso y transmitiendolo
     #a la función de procesar
     def run(self):
         print('Iniciando proceso...', self.index)
-        progreso = self.contador
-        while (progreso <= 100):
-            progreso += 1
-            time.sleep(0.01)
-            self.contador = progreso
-            self.progreso_signal.emit(progreso)      
-    
+        
+        if self.quantum == 0:
+            progreso = self.contador
+            while (progreso <= 100):
+                progreso += 1
+                time.sleep(0.01)
+                self.contador = progreso
+                self.progreso_signal.emit(progreso)      
+        
+        if self.quantum > 0:
+            progreso = self.contador
+            cont = self.quantum
+            while cont != 0:
+                progreso += self.progress_chunk
+                time.sleep(1)
+                self.contador = progreso
+                self.progreso_signal.emit(progreso)
+                cont -= 1
+                
     #Stop termina el proceso y cambia el estado del hilo
     def stop(self):
         self.is_running = False
@@ -370,6 +413,6 @@ class Thread(QtCore.QThread):
 if __name__ == "__main__":
 	app = QtWidgets.QApplication(sys.argv)
 	mainWindow = Admin()
-	mainWindow.resize(810, 880)
+	mainWindow.resize(810, 500)
 	mainWindow.show()
 	sys.exit(app.exec_())
