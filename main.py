@@ -1,4 +1,3 @@
-from threading import currentThread
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtGui import * 
 from PyQt5 import uic
@@ -23,11 +22,11 @@ class Admin(QtWidgets.QMainWindow):
         self.orden_5.setText("5")
         
         self.quantum.setText("2")
-        self.T_1.setText("5")
-        self.T_2.setText("5")
-        self.T_3.setText("5")
-        self.T_4.setText("5")
-        self.T_5.setText("5")
+        self.T_1.setText("13")
+        self.T_2.setText("1")
+        self.T_3.setText("6")
+        self.T_4.setText("2")
+        self.T_5.setText("8")
         
         self.get_orden()
         
@@ -222,59 +221,76 @@ class Admin(QtWidgets.QMainWindow):
         
         #Dependiendo del index del remitente es la barra de progreso a la que se le aumenta el valor
         if index==self.ord_1:
-            if self.thread[index].progreso >= 101:
+            if (self.thread[index].progreso >= 101) & (self.ord_1 not in self.finished):
                 self.pausar(index)
                 self.iniciar_1.setEnabled(False)
                 self.finished.append(self.ord_1)
-            else:
+            elif self.ord_1 not in self.finished:
                 self.progressBar_1.setValue(self.thread[index].progreso)
                 if self.thread[index].progreso == self.thread[index].progress_chunk*self.quantum_value:
+                    if self.thread[index].progreso >= 100:
+                        self.finished.append(self.ord_1)
                     self.pausar(index)
                     self.iniciar_1.setEnabled(False)
+                    
         if index==self.ord_2:
-            if self.thread[index].progreso >= 101:
+            if (self.thread[index].progreso >= 101) & (self.ord_2 not in self.finished):
                 self.pausar(index)
                 self.iniciar_2.setEnabled(False)
                 self.finished.append(self.ord_2)
-            else:
+            elif self.ord_2 not in self.finished:
                 self.progressBar_2.setValue(self.thread[index].progreso)
                 if self.thread[index].progreso == self.thread[index].progress_chunk*self.quantum_value:
+                    if self.thread[index].progreso >= 100:
+                        self.finished.append(self.ord_2)
                     self.pausar(index)
                     self.iniciar_2.setEnabled(False)
+                    
         if index==self.ord_3:
-            if self.thread[index].progreso >= 101:
+            if (self.thread[index].progreso >= 101) & (self.ord_3 not in self.finished):
                 self.pausar(index)
                 self.iniciar_3.setEnabled(False)
                 self.finished.append(self.ord_3)
-            else:
+            elif self.ord_3 not in self.finished:
                 self.progressBar_3.setValue(self.thread[index].progreso)
                 if self.thread[index].progreso == self.thread[index].progress_chunk*self.quantum_value:
+                    if self.thread[index].progreso >= 100:
+                        self.finished.append(self.ord_3)
                     self.pausar(index)
                     self.iniciar_3.setEnabled(False)
+                    
         if index==self.ord_4:
-            if self.thread[index].progreso >= 101:
+            if (self.thread[index].progreso >= 101) & (self.ord_4 not in self.finished):
                 self.pausar(index)
                 self.iniciar_4.setEnabled(False)   
                 self.finished.append(self.ord_4)                        
-            else:
+            elif self.ord_4 not in self.finished:
                 self.progressBar_4.setValue(self.thread[index].progreso)
                 if self.thread[index].progreso == self.thread[index].progress_chunk*self.quantum_value:
+                    if self.thread[index].progreso >= 100:
+                        self.finished.append(self.ord_4)
                     self.pausar(index)
                     self.iniciar_4.setEnabled(False)
+                    
         if index==self.ord_5:
-            if self.thread[index].progreso >= 101:
+            if (self.thread[index].progreso >= 101) & (self.ord_5 not in self.finished):
                 self.pausar(index)
                 self.iniciar_5.setEnabled(False)
                 self.finished.append(self.ord_5)  
-            else:
+            elif self.ord_5 not in self.finished:
                 self.progressBar_5.setValue(self.thread[index].progreso)
                 if self.thread[index].progreso == self.thread[index].progress_chunk*self.quantum_value:
+                    if self.thread[index].progreso >= 100:
+                        self.finished.append(self.ord_5)
                     self.pausar(index)
                     self.iniciar_5.setEnabled(False)
+                    
+                if self.quantum_value > 0:
+                    if(len(self.finished) != 5):
+                        self.iniciar(1, 'lotes')
 
-                if(len(self.finished) != 5):
-                    self.iniciar(1, 'lotes')
-
+        print(self.finished)
+        
     #El método de multiprogramación ejecuta todos los hilos sumultáneamente con un modo distinto a lotes
     def multiprogramacion(self):
         self.reset_btn.setEnabled(False)
@@ -334,9 +350,15 @@ class Admin(QtWidgets.QMainWindow):
         if self.T_5.text() : self.TCPU_5 = int(self.T_5.text())
         else: self.TCPU_5 = self.T_5.text()
 
+    def sort_TCPU(self):
+        srtd = [self.TCPU_1, self.TCPU_2, self.TCPU_3, self.TCPU_4, self.TCPU_5]
+        srtd.sort()
+        return srtd
     #Pendiente por asignar algoritmo  
     def round_robin(self):
         print("Inicio de algoritmo de Round Robin...")
+        self.finished = []
+        
         self.get_orden()
 
         self.threads_init()
@@ -354,9 +376,35 @@ class Admin(QtWidgets.QMainWindow):
         
         self.iniciar(1, 'lotes')
 
-    #Pendiente por asignar algoritmo
+    #Prioridades utiliza el algoritmo SJF para fijar la prioridad
     def prioridades(self):
         print("Inicio de algoritmo de Prioridades...")
+        self.reset_btn.setEnabled(False)
+        self.threads_init()
+        sorted_tcpu = self.sort_TCPU()
+        print(sorted_tcpu)
+        # print(self.TCPU_1)
+        i = 0
+        #se cambia la prioridad del proceso con relación al TCPU
+        while i < 5:
+            if self.TCPU_1 == sorted_tcpu[i]:
+                self.orden_1.setText(f'{int(sorted_tcpu.index(sorted_tcpu[i]))+1}')
+            
+            if self.TCPU_2 == sorted_tcpu[i]:
+                self.orden_2.setText(f'{int(sorted_tcpu.index(sorted_tcpu[i]))+1}')
+                
+            if self.TCPU_3 == sorted_tcpu[i]:
+                self.orden_3.setText(f'{int(sorted_tcpu.index(sorted_tcpu[i]))+1}')
+            
+            if self.TCPU_4 == sorted_tcpu[i]:
+                self.orden_4.setText(f'{int(sorted_tcpu.index(sorted_tcpu[i]))+1}')
+            
+            if self.TCPU_5 == sorted_tcpu[i]:
+                self.orden_5.setText(f'{int(sorted_tcpu.index(sorted_tcpu[i]))+1}')
+            i += 1
+        
+        
+        self.iniciar(1, 'lotes')
 
     #Pendiente por asignar algoritmo
     def colas_multiples(self):
