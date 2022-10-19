@@ -21,12 +21,12 @@ class Admin(QtWidgets.QMainWindow):
         self.orden_4.setText("4")
         self.orden_5.setText("5")
         
-        self.quantum.setText("2")
-        self.T_1.setText("13")
-        self.T_2.setText("1")
+        self.quantum.setText("0")
+        self.T_1.setText("1")
+        self.T_2.setText("2")
         self.T_3.setText("6")
-        self.T_4.setText("2")
-        self.T_5.setText("8")
+        self.T_4.setText("8")
+        self.T_5.setText("13")
         
         self.get_orden()
         
@@ -102,8 +102,10 @@ class Admin(QtWidgets.QMainWindow):
     #La función iniciar recibe el numero del proceso que se va a iniciar y el modo que
     #determina la manera en la que se inicia cada proceso
     def iniciar (self, num_proceso, modo='boton'):
-        self.get_orden()
         self.reset_btn.setEnabled(False)
+        self.finished = []
+        self.get_orden()
+
         #En caso de que el modo sea lotes, iniciaremos el siguiente hilo en cuanto termine de procesarse el actual
         if (num_proceso > 1) & (modo == 'lotes'):
             #Si el proceso anterior no está marcado como candelado, iniciamos el proceso siguiente en cuanto termine el actual
@@ -294,12 +296,15 @@ class Admin(QtWidgets.QMainWindow):
     #El método de multiprogramación ejecuta todos los hilos sumultáneamente con un modo distinto a lotes
     def multiprogramacion(self):
         self.reset_btn.setEnabled(False)
+        self.finished = []
+        self.get_orden()
+        self.threads_init()
         self.iniciar(1, 'multi')
         self.iniciar(2, 'multi')
         self.iniciar(3, 'multi')
         self.iniciar(4, 'multi')
         self.iniciar(5, 'multi')
-    
+           
     #Reset es para reiniciar todos los procesos en 0 para probar distintos casos en el administrador
     def reset(self):
         self.progressBar_1.setValue(0)
@@ -354,31 +359,25 @@ class Admin(QtWidgets.QMainWindow):
         srtd = [self.TCPU_1, self.TCPU_2, self.TCPU_3, self.TCPU_4, self.TCPU_5]
         srtd.sort()
         return srtd
-    #Pendiente por asignar algoritmo  
+         
     def round_robin(self):
         print("Inicio de algoritmo de Round Robin...")
+        self.quantum.setText("0")
         self.finished = []
-        
         self.get_orden()
-
         self.threads_init()
-        
         self.reset_btn.setEnabled(False)
-        
         self.iniciar(1, 'lotes')
+        self.quantum.setText("0")
         
     def fcfs(self):
         self.get_orden()
-
         self.threads_init()
-        
         self.reset_btn.setEnabled(False)
-        
         self.iniciar(1, 'lotes')
 
     #Prioridades utiliza el algoritmo SJF para fijar la prioridad
     def prioridades(self):
-        print("Inicio de algoritmo de Prioridades...")
         self.reset_btn.setEnabled(False)
         self.threads_init()
         sorted_tcpu = self.sort_TCPU()
@@ -402,7 +401,6 @@ class Admin(QtWidgets.QMainWindow):
             if self.TCPU_5 == sorted_tcpu[i]:
                 self.orden_5.setText(f'{int(sorted_tcpu.index(sorted_tcpu[i]))+1}')
             i += 1
-        
         
         self.iniciar(1, 'lotes')
 
