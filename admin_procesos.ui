@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>809</width>
-    <height>589</height>
+    <width>989</width>
+    <height>565</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,7 @@
      <rect>
       <x>10</x>
       <y>130</y>
-      <width>784</width>
+      <width>941</width>
       <height>401</height>
      </rect>
     </property>
@@ -708,6 +708,121 @@
       <string>   Reset Process</string>
      </property>
     </widget>
+    <widget class="QComboBox" name="queueCB1">
+     <property name="geometry">
+      <rect>
+       <x>820</x>
+       <y>70</y>
+       <width>69</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>790</x>
+       <y>70</y>
+       <width>31</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Cola:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="queueL2">
+     <property name="geometry">
+      <rect>
+       <x>790</x>
+       <y>130</y>
+       <width>31</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Cola:</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="queueCB2">
+     <property name="geometry">
+      <rect>
+       <x>820</x>
+       <y>130</y>
+       <width>69</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="queueL3">
+     <property name="geometry">
+      <rect>
+       <x>790</x>
+       <y>190</y>
+       <width>31</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Cola:</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="queueCB3">
+     <property name="geometry">
+      <rect>
+       <x>820</x>
+       <y>190</y>
+       <width>69</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="queueCB4">
+     <property name="geometry">
+      <rect>
+       <x>820</x>
+       <y>250</y>
+       <width>69</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="queueCB5">
+     <property name="geometry">
+      <rect>
+       <x>820</x>
+       <y>310</y>
+       <width>69</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="queueL4">
+     <property name="geometry">
+      <rect>
+       <x>790</x>
+       <y>250</y>
+       <width>31</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Cola:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="queueL5">
+     <property name="geometry">
+      <rect>
+       <x>790</x>
+       <y>310</y>
+       <width>31</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Cola:</string>
+     </property>
+    </widget>
     <zorder>progressBar_1</zorder>
     <zorder>pausar_5</zorder>
     <zorder>cancelar_3</zorder>
@@ -749,6 +864,16 @@
     <zorder>label_10</zorder>
     <zorder>label_11</zorder>
     <zorder>reset_btn</zorder>
+    <zorder>queueCB1</zorder>
+    <zorder>label_12</zorder>
+    <zorder>queueL2</zorder>
+    <zorder>queueCB2</zorder>
+    <zorder>queueL3</zorder>
+    <zorder>queueCB3</zorder>
+    <zorder>queueCB4</zorder>
+    <zorder>queueCB5</zorder>
+    <zorder>queueL4</zorder>
+    <zorder>queueL5</zorder>
    </widget>
    <widget class="QPushButton" name="lotes_btn">
     <property name="geometry">
@@ -866,6 +991,53 @@
     <property name="text">
      <string>   Colas multiples</string>
     </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>30</y>
+      <width>271</width>
+      <height>85</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="title">
+     <string>Algoritmos colas multiples</string>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label_13">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Cola 1: FCFS</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_14">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Cola 2: Round robin</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
  </widget>

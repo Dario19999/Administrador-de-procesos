@@ -80,6 +80,14 @@ class Admin(QtWidgets.QMainWindow):
         self.rr_btn.setIcon(QIcon('icon_rr.png'))
         self.fcfs_btn.clicked.connect(self.fcfs)
         self.fcfs_btn.setIcon(QIcon('icon_fcfs.png'))
+
+        #Llenar combo Box colas
+        queueNames= [" ", "Cola 1", "Cola 2"]
+        self.queueCB1.addItems(queueNames)
+        self.queueCB2.addItems(queueNames)
+        self.queueCB3.addItems(queueNames)
+        self.queueCB4.addItems(queueNames)
+        self.queueCB5.addItems(queueNames)
         
         self.threads_init()
         #activo se utiliza para hacer toggle del estado de los botones
@@ -362,7 +370,7 @@ class Admin(QtWidgets.QMainWindow):
          
     def round_robin(self):
         print("Inicio de algoritmo de Round Robin...")
-        self.quantum.setText("0")
+        self.quantum.setText("1")
         self.finished = []
         self.get_orden()
         self.threads_init()
@@ -407,6 +415,7 @@ class Admin(QtWidgets.QMainWindow):
     #Pendiente por asignar algoritmo
     def colas_multiples(self):
         print("Inicio de algoritmo de Colas Multiples...")
+
 
 #La clase Thread extiende de los QThread de QTCore lo que nos permite hacer override de sus funciones
 class Thread(QtCore.QThread):
